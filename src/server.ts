@@ -10,8 +10,15 @@ dotenv.config();
 const app = express();
 
 // Middleware to parse JSON bodies with configurable limit
+
+// Logger middleware
+app.use(morgan('combined'));
+=======
 const payloadLimit = process.env.PAYLOAD_LIMIT || '50mb';
 app.use(express.json({ limit: payloadLimit }));
+
+// Logger middleware
+app.use(morgan('combined'));
 =======
 
 // Logger middleware
