@@ -32,6 +32,11 @@
           "type": "number",
           "default": 3000,
           "description": "Port for the Express server."
+        },
+        "copilotProxy.payloadLimit": {
+          "type": "string",
+          "default": "50mb",
+          "description": "Maximum payload size for incoming requests (e.g., '50mb', '100mb')."
         }
       }
     },

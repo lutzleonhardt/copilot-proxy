@@ -45,9 +45,12 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand('Copilot Proxy - Start Server', () => {
       if (!serverInstance) {
-        const configPort = vscode.workspace.getConfiguration("copilotProxy").get("port", 3000);
+        const config = vscode.workspace.getConfiguration("copilotProxy");
+        const configPort = config.get("port", 3000);
+        const payloadLimit = config.get("payloadLimit", "50mb");
+        process.env.PAYLOAD_LIMIT = payloadLimit;
         serverInstance = startServer(configPort);
-        vscode.window.showInformationMessage(`Express server started on port ${configPort}.`);
+        vscode.window.showInformationMessage(`Express server started on port ${configPort} with ${payloadLimit} payload limit.`);
       } else {
         vscode.window.showInformationMessage('Express server is already running.');
       }
